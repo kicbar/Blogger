@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dto;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Application.Interfaces
 {
     public interface IPostService
     {
-        IEnumerable<Post> GetAllPosts();
-        Post GetPostById(int id);
+        IEnumerable<PostDto> GetAllPosts();
+        PostDto GetPostById(int id);
     }
 }
