@@ -1,6 +1,7 @@
 ﻿using Application.Dto;
 using Application.Interfaces;
 using AutoMapper;
+using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,16 @@ namespace Application.Services
         {
             var post = _postRepository.GetById(id);
             return _mapper.Map<PostDto>(post);
+        }
+
+        public PostDto AddNewPost(CreatePostDto newPostDto)
+        {
+            if (string.IsNullOrEmpty(newPostDto.Title))
+                throw new Exception("Post can not have an empty title.");
+
+            var post = _mapper.Map<Post>(newPostDto);
+            _postRepository.Add(post);
+            return _mapper.Map<PostDto>(post); ;
         }
     }
 }
