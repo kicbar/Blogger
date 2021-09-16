@@ -1,5 +1,6 @@
 ﻿using Application.Dto;
 using Application.Interfaces;
+using AutoMapper;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,25 @@ namespace Application.Services
 {
     public class PostService : IPostService
     {
+        private readonly IMapper _mapper;
         private readonly IPostRepository _postRepository;
 
-        public PostService(IPostRepository postRepository)
+        public PostService(IPostRepository postRepository, IMapper mapper)
         {
+            _mapper = mapper;
             _postRepository = postRepository;
         }
 
         public IEnumerable<PostDto> GetAllPosts()
         {
             var posts = _postRepository.GetAll();
-            return posts.Select(post => new PostDto() {Id = post.Id, Title = post.Title, Content = post.Content});
+            return _mapper.Map<IEnumerable<PostDto>>(posts);
         }
 
         public PostDto GetPostById(int id)
         {
             var post = _postRepository.GetById(id);
-            return new PostDto() {Id = post.Id, Title = post.Title, Content = post.Content};
+            return _mapper.Map<PostDto>(post);
         }
     }
 }
