@@ -25,5 +25,16 @@ namespace WebAPI.Controllers
             return Ok(posts);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var post = _postService.GetPostById(id);
+
+            if (post == null)
+                return NotFound();
+            
+            return Ok(post);
+        }
+
     }
 }
