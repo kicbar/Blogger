@@ -47,5 +47,13 @@ namespace WebAPI.Controllers
             var post = _postService.AddNewPost(createPostDto);
             return Created($"api/posts/{post.Id}", post);
         }
+
+        [SwaggerOperation(Summary = "Update a existing post.")]
+        [HttpPut]
+        public IActionResult Update(UpdatePostDto updatePostDto)
+        {
+            _postService.UpdatePost(updatePostDto);
+            return NoContent();
+        }
     }
 }
