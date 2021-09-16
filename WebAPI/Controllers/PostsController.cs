@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace WebAPI.Controllers
             _postService = postService;
         }
 
+        [SwaggerOperation(Summary = "Retrieves all posts.")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -25,6 +27,7 @@ namespace WebAPI.Controllers
             return Ok(posts);
         }
 
+        [SwaggerOperation(Summary = "Retrieves a specyfic post by unique id.")]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
